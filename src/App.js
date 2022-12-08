@@ -45,8 +45,8 @@ function App() {
   });
   return (
     <div className="App grid">
-      {cardData}
-      {!loading ? <div className="flex contentCenter">Loading...</div> : null}
+      { cardData}
+      {loading ? <div className="flex contentCenter">Loading...</div> : null}
     </div>
   );
 }
