@@ -1,7 +1,7 @@
-import './App.css';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import Card from './components/card';
+import "./App.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Card from "./components/card";
 
 function App() {
   const [data, setData] = useState([]);
@@ -10,7 +10,9 @@ function App() {
   async function getData() {
     setLoading(true);
     try {
-      const res = await axios.get(`https://dummyjson.com/products?limit=${dataItems}`);
+      const res = await axios.get(
+        `https://dummyjson.com/products?limit=${dataItems}`
+      );
       setData(res.data.products);
     } catch (error) {
       console.error(error);
@@ -19,21 +21,32 @@ function App() {
   }
   useEffect(() => {
     getData();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  window.onscroll = function() {
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+  window.onscroll = function () {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
       setDataItems(dataItems + 5);
       getData();
     }
   };
   const cardData = data?.map((data) => {
-    return <Card key={data.id} img={data.thumbnail} brand={data.brand} title={ data.title } desc={data.description} price={ data.price } rating={ data.rating } stock={ data.stock }/>
+    return (
+      <Card
+        key={data.id}
+        img={data.thumbnail}
+        brand={data.brand}
+        title={data.title}
+        desc={data.description}
+        price={data.price}
+        rating={data.rating}
+        stock={data.stock}
+      />
+    );
   });
   return (
     <div className="App grid">
-      { cardData }
-      { !loading ? <div className='flex contentCenter'>Loading...</div> : null }
+      {cardData}
+      {!loading ? <div className="flex contentCenter">Loading...</div> : null}
     </div>
   );
 }
